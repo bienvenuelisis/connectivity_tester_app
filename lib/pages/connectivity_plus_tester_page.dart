@@ -32,13 +32,6 @@ class _ConnectivityPlusTesterPageState
           (_) {},
         );
     _connectivitySubscription.onData(_listenToConnectivityResult);
-
-    Future.delayed(
-      Duration.zero,
-      () async {
-        await _showConnectivityDialog(context);
-      },
-    );
   }
 
   bool get isConnected => !isNotConnected;

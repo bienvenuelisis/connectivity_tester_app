@@ -17,6 +17,7 @@ class _CrossConnectivityTesterPageState
     extends State<CrossConnectivityTesterPage> {
   bool _dialogVisible = false;
   ConnectivityStatus _status = ConnectivityStatus.none;
+  late StreamSubscription<ConnectivityStatus> _connectivitySubscription;
 
   @override
   void initState() {
@@ -26,17 +27,15 @@ class _CrossConnectivityTesterPageState
 
     Future.delayed(
       Duration.zero,
-      () {
-        Connectivity()
-            .onConnectivityChanged
-            .listen(_listenToConnectivityResult);
-      },
-    );
-
-    Future.delayed(
-      Duration.zero,
       () async {
-        await _showConnectivityDialog(context);
+        _connectivitySubscription =
+            Connectivity().onConnectivityChanged.listen((_) {});
+
+        _connectivitySubscription.onData(_listenToConnectivityResult);
+
+        if (!isConnected) {
+          await _showConnectivityDialog(context);
+        }
       },
     );
   }
@@ -69,6 +68,12 @@ class _CrossConnectivityTesterPageState
         unawaited(_showConnectivityDialog(context));
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _connectivitySubscription.cancel();
+    super.dispose();
   }
 
   bool get isConnected => _status != ConnectivityStatus.unknown;

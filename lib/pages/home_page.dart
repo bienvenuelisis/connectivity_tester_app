@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
                   height: 15,
                 ),
                 const Text(
-                  'Navigate to one of the pages to toggle your connectivity status.',
+                  'Navigate to one of the pages and toggle your connectivity status.',
                 ),
                 const _Gap(
                   height: 20,
