@@ -1,0 +1,22 @@
+name: connectivity_tester_app
+description: "App that tests internet connectivity with two approaches"
+publish_to: 'none'
+version: 0.0.1+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  connectivity_plus: ^5.0.2
+  cross_connectivity: ^3.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
