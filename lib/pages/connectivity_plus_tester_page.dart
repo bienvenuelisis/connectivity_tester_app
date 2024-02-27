@@ -33,9 +33,15 @@ class _ConnectivityPlusTesterPageState
         );
     _connectivitySubscription.onData(_listenToConnectivityResult);
 
-    if (!isConnected) {
-      _showConnectivityDialog(context);
-    }
+    Future.delayed(
+      const Duration(seconds: 1),
+      () async {
+        if (!isConnected) {
+          _dialogVisible = true;
+          await _showConnectivityDialog(context);
+        }
+      },
+    );
   }
 
   bool get isConnected => !isNotConnected;
