@@ -32,6 +32,10 @@ class _ConnectivityPlusTesterPageState
           (_) {},
         );
     _connectivitySubscription.onData(_listenToConnectivityResult);
+
+    if (!isConnected) {
+      _showConnectivityDialog(context);
+    }
   }
 
   bool get isConnected => !isNotConnected;
